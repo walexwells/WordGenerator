@@ -10,39 +10,41 @@
 		
 function Eventful(){}
 
-Eventful.prototype.addEventListener = function(event,listener){
-	if(!this._eventListeners)this._eventListeners = {};
-	if(!this._eventListeners[event])this._eventListeners[event] = []
-	this._eventListeners[event].push(listener);
-}
+Eventful.prototype = {
+	addEventListener: function(event,listener){
+		if(!this._eventListeners)this._eventListeners = {};
+		if(!this._eventListeners[event])this._eventListeners[event] = []
+		this._eventListeners[event].push(listener);
+	},
 
-Eventful.prototype.fireEvent = function(event,obj){
-	if(this._eventListeners && this._eventListeners[event]){
-		this._eventListeners[event].forEach(function(listener){
-			listener(obj)
-		});
+	fireEvent: function(event,obj){
+		if(this._eventListeners && this._eventListeners[event]){
+			this._eventListeners[event].forEach(function(listener){
+				listener(obj)
+			});
+		}
+	},
+
+	removeListener: function(event,listener){
+		if(this._eventListeners && this._eventListeners[event]){
+			var i = this._eventListeners[event].indexOf(listener);
+			if(i != -1)this.this._eventListeners[event].splice(i,1);
+		}
+	},
+
+	bubbleEvent: function(obj,event){
+		obj.addEventListener(event,function(eventObj){
+			this.fireEvent(event,eventObj);
+		}.bind(this));
+	},
+
+	bubbleEvents: function(obj,events){
+		events.forEach(function(event){
+			this.bubbleEvent(obj,event);
+		}.bind(this));
 	}
-}
 
-Eventful.prototype.removeListener = function(event,listener){
-	if(this._eventListeners && this._eventListeners[event]){
-		var i = this._eventListeners[event].indexOf(listener);
-		if(i != -1)this.this._eventListeners[event].splice(i,1);
-	}
 }
-
-Eventful.prototype.bubbleEvent = function(obj,event){
-	obj.addEventListener(event,function(eventObj){
-		this.fireEvent(event,eventObj);
-	}.bind(this));
-}
-
-Eventful.prototype.bubbleEvents = function(obj,events){
-	events.forEach(function(event){
-		this.bubbleEvent(obj,event);
-	}.bind(this));
-}
-
 
 'use strict';
 
