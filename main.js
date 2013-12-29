@@ -1,12 +1,7 @@
 
 
 
-
-
-
-
-
-
+'use strict';
 		
 function Eventful(){}
 
@@ -45,8 +40,6 @@ Eventful.prototype = {
 	}
 
 }
-
-'use strict';
 
 
 function ViewModel(){
