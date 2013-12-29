@@ -2,7 +2,7 @@
 
 
 'use strict';
-		
+
 function Eventful(){}
 
 Eventful.prototype = {
@@ -44,18 +44,25 @@ Eventful.prototype = {
 
 function ViewModel(){
 	this.names = ko.observableArray();
+	this.maxAge = ko.observable(100);
+	this.minAge = ko.observable(1);
+	this.count = ko.observable(20);
+
 	this.characterGenerator = new CharacterGenerator();
-	this.characterGenerator.onReady = function(){
+	this.characterGenerator.onReady = this.handleCharGenLoad.bind(this);
+}
+
+ViewModel.prototype = {
+
+	handleCharGenLoad: function(){
 		for(var i = 0; i < 50; i++){
 			this.names.push(new NameCard(
 				this.characterGenerator.getRandom()
 			));
 		}
-	}.bind(this);
-	this.maxAge = ko.observable(100);
-	this.minAge = ko.observable(1);
-	this.count = ko.observable(20);
-}
+	}
+
+};
 
 function NameCard(cfg){
 	this.visible = ko.observable(true);
@@ -106,7 +113,7 @@ function CharacterGenerator(){
 CharacterGenerator.prototype.getRandom = function(){
 	var gender = this._randomGender(),
 		age = this._randomAge();
-	
+
 	return {
 		name: this._nameGenerator.random(gender),
 		gender: gender,
@@ -408,7 +415,7 @@ function NameGeneratorViewModel(ng){
 		this.women.push(ng.getWoman());
 		this.couples.push(ng.getCouple());
 	}
-	
+
 }
 
 
@@ -418,16 +425,16 @@ function NameMixer(names){
 	for(var i = 0; i < names.length; i++){
 		var name = names[i].name;
 		var nameChunks = name.split(splitter);
-		
+
 		if(nameChunks.length > 1){ // get rid of names without vowels or single vowel names
-			
+
 			// first chunk in name
 			this.addChunk(['_',nameChunks[0],nameChunks[1]]);
 			nameChunks.shift();
-					
+
 			// the rest of the chunks
 			while(nameChunks.length){
-			
+
 				var chunk = [nameChunks[0],nameChunks[1],nameChunks[2]];
 				nameChunks.shift();
 				nameChunks.shift();
@@ -435,7 +442,7 @@ function NameMixer(names){
 			}
 		}
 	}
-	
+
 }
 
 NameMixer.prototype = {
@@ -446,12 +453,12 @@ NameMixer.prototype = {
 		}
 		this.chunks[key].push([chunk[1],chunk[2]]);
 	},
-	
+
 	getName: function(){
 		var chunk = this.chunks['_'].random();
 		var name = chunk[0] + chunk[1];
 		var key = chunk[1].toLowerCase();
-		
+
 		for(var i = 0; i < 3; i++){
 			var chunk = this.chunks[key].random();
 			name += chunk[0];
@@ -461,11 +468,11 @@ NameMixer.prototype = {
 			name += chunk[1];
 			key = chunk[1].toLowerCase();
 		}
-		
+
 		if(name.length < 2){
 			return this.getName();
 		}
-		
+
 		return name;
 	}
 };
