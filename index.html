@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+	<title>Name Generator</title>
+	<style>
+		.family>p{
+			margin: 0 1em 0 0;
+		}
+		.family>div{
+			padding-left: 1em;
+		}
+		p{
+			margin: 0;
+		}
+		.column{
+			float: left;
+			width: 25%;
+		}
+		dt, dd {
+			display: inline-block,
+		}
+		.namecard{
+			border: 1px solid black;
+			padding: 1em;
+			margin: 2px;
+			min-width: 20em;
+			float: left;
+		}
+		td:nth-child(1){
+			font-weight: bold;
+			padding-right: 1em;
+		}
+		td:nth-child(1)::after{
+			content: ":";
+		}
+		.namecard .buttons{
+			text-align: right;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: moz-none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+		.namecard .buttons span{
+			border: solid black 1px;
+			padding: 2px 4px;
+			border-radius: 4px;
+			display: inline-block;
+			background-color: white;
+		}
+		.namecard .buttons span:hover{
+			background-color: #eee;
+		}
+		.namecard .buttons span:active{
+			background-color: #ddd;
+		}
+		.namecard .name{
+			font-size: 2em;
+		}
+		
+		.namecard .buttons span.marked {
+			background-color: rgb(195, 235, 195);
+		}
+		
+		.namecard .buttons span.marked:hover {
+			background-color: green;
+		}
+		
+		.namecard.male {
+			background-color: rgb(234, 234, 252);
+		}
+		.namecard.female {
+			background-color: rgb(255, 226, 226);
+		}
+		
+		input[type=number] {
+			width: 3em;
+		}
+		
+		label>*{
+			vertical-align: middle;
+		}
+		
+		input[type=radio] {
+			margin-bottom: 5px;
+		}
+	</style>
+	<script type="text/html" id="namecard-template">
+		<div class="namecard" data-bind="visible:visible, css: {male: gender == 'Male', female: gender == 'Female'}">
+			<div class="name" data-bind="text:name">George Cannot</div>
+			<table>
+				<tr><td>Gender</td>  <td data-bind="text:gender"></td>   </td>
+				<tr><td>Age</td>     <td data-bind="text:age"></td>      </td>
+				<tr><td>Birthday</td><td data-bind="text:birthday"></td> </td>
+				<tr><td>Hair</td>    <td data-bind="text:hair"></td></td></td>
+				<tr><td>Eyes</td>    <td data-bind="text:eyes"></td>     </td>
+				<tr><td>Height</td>  <td data-bind="text:height"></td>   </td>
+				<tr><td>Build</td>  <td data-bind="text:weight"></td>   </td>
+			</table>
+			<div class="buttons">
+				<span data-bind="click:mark, css: { marked: marked }">Mark</span>
+				<span data-bind="click:reject">Reject</span>
+			</div>
+		<div>
+	</script>
+</head>
+<body>
+	<div>
+		<div>
+			Gender:
+			<label>Male: <input type="radio" name="gender"/></label>
+			<label>Female: <input type="radio" name="gender"/></label>
+			<label>Both: <input type="radio" name="gender"/></label>
+		</div>
+		<div>
+			<label>Name Types: 
+				<select multiple>
+					<option>Real</option>
+					<option>Randomized</option>
+					<option>Totally Random</option>
+				</select>
+			</label>
+		</div>
+		<div><label>Max Age: <input type="number" data-bind="value:maxAge" size="3"/><input data-bind="value:maxAge" type="range" min="1" max="150"/></label></div>
+		<div><label>Min Age: <input type="number" data-bind="value:minAge" size="3"/><input data-bind="value:minAge" type="range" min="1" max="150"/></label></div>
+		
+		<div><label>Count: <input type="number" data-bind="value:count" size="3"/><input data-bind="value:count" type="range" min="1" max="150"/></label></div>
+		<div><input type="button" value="Generate Characters"/>
+	</div>
+	<div data-bind="template: { name: 'namecard-template', foreach: names }"></div>
+	<script src="lib/knockout.js"></script>
+	<script src="main.js"></script>
+	<script>
+	
+		var vm = new ViewModel();
+		ko.applyBindings(vm);
+	</script>
+</body>
+</html>
