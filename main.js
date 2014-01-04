@@ -55,11 +55,29 @@ function ViewModel(){
 ViewModel.prototype = {
 
 	handleCharGenLoad: function(){
-		for(var i = 0; i < 50; i++){
+		for(var i = 0; i < 18; i++){
 			this.names.push(new NameCard(
 				this.characterGenerator.getRandom()
 			));
 		}
+	},
+	
+	next: function(){
+		var current = this.names(),
+			nextGroup = [];
+		
+		for(var i = 0; i < current.length; i++){
+			if(current[i].marked()){
+				nextGroup.push(current[i]);
+			}
+		};
+		
+		while(nextGroup.length < 18){
+			nextGroup.push(new NameCard(this.characterGenerator.getRandom()));
+		}
+		
+		this.names(nextGroup);
+		
 	}
 
 };
@@ -423,8 +441,10 @@ function NameMixer(names){
 	var splitter = /([aeiou]+)/ig;
 	this.chunks = {};
 	this.finalChunks = {};
+	this.plainNames = [];
 	for(var i = 0; i < names.length; i++){
 		var name = names[i].name;
+		this.plainNames.push(name);
 		var nameChunks = name.split(splitter);
 
 		if(nameChunks.length > 1){ // get rid of names without vowels or single vowel names
@@ -457,6 +477,10 @@ NameMixer.prototype = {
 	},
 
 	getName: function(){
+		return Math.random() > 0 ? this.getMixedName() : this.getPlainName();
+	},
+	
+	getMixedName: function(){
 		var chunkCount = Math.floor(Math.random()*3);
 		
 		var chunk = this.chunks['_'].random();
@@ -487,5 +511,9 @@ NameMixer.prototype = {
 		}
 		
 		return name;
+	},
+	
+	getPlainName: function(){
+		return this.plainNames.random()//+'~';
 	}
 };

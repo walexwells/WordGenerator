@@ -38,6 +38,7 @@ td:nth-child(1)::after{
 	-moz-user-select: moz-none;
 	-ms-user-select: none;
 	user-select: none;
+	cursor: pointer;
 }
 .namecard .buttons span{
 	border: solid black 1px;

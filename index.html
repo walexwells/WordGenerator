@@ -27,6 +27,7 @@
 		<div><label>Count: <input type="number" data-bind="value:count" size="3"/><input data-bind="value:count" type="range" min="1" max="150"/></label></div>
 		<div><input type="button" value="Generate Characters"/>
 	</div>-->
+	<input type="button" value="Next" data-bind="click: next"/>
 	<div data-bind="foreach: names">
 		<!--<div class="namecard" data-bind="visible:visible, css: {male: gender == 'Male', female: gender == 'Female'}">-->
 		<div class="namecard" data-bind="visible:visible">
@@ -42,7 +43,7 @@
 			</table>-->
 			<div class="buttons">
 				<span data-bind="click:mark, css: { marked: marked }">Mark</span>
-				<span data-bind="click:reject">Reject</span>
+				<span data-bind="click:reject, visible: !marked()">Reject</span>
 			</div>
 		<div>
 	</div>
