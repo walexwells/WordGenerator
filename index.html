@@ -5,7 +5,7 @@
 	<link rel="stylesheet" href="main.css"/>
 </head>
 <body>
-	<div>
+	<!--<div>
 		<div>
 			Gender:
 			<label>Male: <input type="radio" name="gender"/></label>
@@ -26,11 +26,12 @@
 		
 		<div><label>Count: <input type="number" data-bind="value:count" size="3"/><input data-bind="value:count" type="range" min="1" max="150"/></label></div>
 		<div><input type="button" value="Generate Characters"/>
-	</div>
+	</div>-->
 	<div data-bind="foreach: names">
-			<div class="namecard" data-bind="visible:visible, css: {male: gender == 'Male', female: gender == 'Female'}">
+		<!--<div class="namecard" data-bind="visible:visible, css: {male: gender == 'Male', female: gender == 'Female'}">-->
+		<div class="namecard" data-bind="visible:visible">
 			<div class="name" data-bind="text:name">George Cannot</div>
-			<table>
+			<!--<table>
 				<tr><td>Gender</td>  <td data-bind="text:gender"></td>   </td>
 				<tr><td>Age</td>     <td data-bind="text:age"></td>      </td>
 				<tr><td>Birthday</td><td data-bind="text:birthday"></td> </td>
@@ -38,7 +39,7 @@
 				<tr><td>Eyes</td>    <td data-bind="text:eyes"></td>     </td>
 				<tr><td>Height</td>  <td data-bind="text:height"></td>   </td>
 				<tr><td>Build</td>  <td data-bind="text:weight"></td>   </td>
-			</table>
+			</table>-->
 			<div class="buttons">
 				<span data-bind="click:mark, css: { marked: marked }">Mark</span>
 				<span data-bind="click:reject">Reject</span>

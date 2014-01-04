@@ -21,6 +21,7 @@ dt, dd {
 	margin: 2px;
 	min-width: 20em;
 	float: left;
+	background-color: rgb(247, 255, 226);
 }
 td:nth-child(1){
 	font-weight: bold;

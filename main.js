@@ -422,6 +422,7 @@ function NameGeneratorViewModel(ng){
 function NameMixer(names){
 	var splitter = /([aeiou]+)/ig;
 	this.chunks = {};
+	this.finalChunks = {};
 	for(var i = 0; i < names.length; i++){
 		var name = names[i].name;
 		var nameChunks = name.split(splitter);
@@ -448,31 +449,43 @@ function NameMixer(names){
 NameMixer.prototype = {
 	addChunk: function(chunk){
 		var key = chunk[0].toLowerCase();
-		if(!this.chunks[key]){
-			this.chunks[key] = [];
+		var group = chunk[2] === undefined ? this.finalChunks : this.chunks;
+		if(!group[key]){
+			group[key] = [];
 		}
-		this.chunks[key].push([chunk[1],chunk[2]]);
+		group[key].push([chunk[1],chunk[2]]);
 	},
 
 	getName: function(){
+		var chunkCount = Math.floor(Math.random()*3);
+		
 		var chunk = this.chunks['_'].random();
 		var name = chunk[0] + chunk[1];
 		var key = chunk[1].toLowerCase();
 
-		for(var i = 0; i < 3; i++){
-			var chunk = this.chunks[key].random();
+			var stuff = [{chunk:chunk,key:"_"}];
+		
+		while(chunkCount-- && this.chunks[key]){
+			chunk = this.chunks[key].random();
+			stuff.push({chunk:chunk, key:key});
 			name += chunk[0];
-			if(!chunk[1]){
-				break;
-			}
 			name += chunk[1];
 			key = chunk[1].toLowerCase();
 		}
 
-		if(name.length < 2){
+		if(this.finalChunks[key]){
+			chunk = this.finalChunks[key].random();
+			stuff.push({chunk:chunk, key:key});
+			name += chunk[0];
+		} else {
 			return this.getName();
 		}
 
+
+		if(name.length < 3){
+			return this.getName();
+		}
+		
 		return name;
 	}
 };
