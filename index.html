@@ -5,48 +5,52 @@
 	<link rel="stylesheet" href="main.css"/>
 </head>
 <body>
-	<!--<div>
-		<div>
-			Gender:
-			<label>Male: <input type="radio" name="gender"/></label>
-			<label>Female: <input type="radio" name="gender"/></label>
-			<label>Both: <input type="radio" name="gender"/></label>
-		</div>
-		<div>
-			<label>Name Types: 
-				<select multiple>
-					<option>Real</option>
-					<option>Randomized</option>
-					<option>Totally Random</option>
-				</select>
-			</label>
-		</div>
-		<div><label>Max Age: <input type="number" data-bind="value:maxAge" size="3"/><input data-bind="value:maxAge" type="range" min="1" max="150"/></label></div>
-		<div><label>Min Age: <input type="number" data-bind="value:minAge" size="3"/><input data-bind="value:minAge" type="range" min="1" max="150"/></label></div>
+	<div>
+	
+	
+		<h3>Generated</h3>
+	
+		<label>Male<input type="checkbox" data-bind="checked:male"/></label>
+		<label>Male Full<input type="checkbox" data-bind="checked:maleFull"/></label>
+		<label>Female<input type="checkbox" data-bind="checked:female"/></label>
+		<label>Female Full<input type="checkbox" data-bind="checked:femaleFull"/></label>
+		<label>Last<input type="checkbox" data-bind="checked:last"/></label>
+		<label>Location<input type="checkbox" data-bind="checked:location"/></label>
+		<label>Noun<input type="checkbox" data-bind="checked:noun"/></label>
 		
-		<div><label>Count: <input type="number" data-bind="value:count" size="3"/><input data-bind="value:count" type="range" min="1" max="150"/></label></div>
-		<div><input type="button" value="Generate Characters"/>
-	</div>-->
+		<br>
+		
+		<h3>Real</h3>
+		
+		<label>Male<input type="checkbox" data-bind="checked:realMale"/></label>
+		<label>Male Full<input type="checkbox" data-bind="checked:realMaleFull"/></label>
+		<label>Female<input type="checkbox" data-bind="checked:realFemale"/></label>
+		<label>Female Full<input type="checkbox" data-bind="checked:realFemaleFull"/></label>
+		<label>Last<input type="checkbox" data-bind="checked:realLast"/></label>
+		<label>Location<input type="checkbox" data-bind="checked:realLocation"/></label>
+		<label>Noun<input type="checkbox" data-bind="checked:realNoun"/></label>
+		
+		<br>
+
 	<input type="button" value="Next" data-bind="click: next"/>
-	<div data-bind="foreach: names">
-		<!--<div class="namecard" data-bind="visible:visible, css: {male: gender == 'Male', female: gender == 'Female'}">-->
+	
+	<div data-bind="foreach: words">
 		<div class="namecard" data-bind="visible:visible">
 			<div class="name" data-bind="text:name">George Cannot</div>
-			<!--<table>
-				<tr><td>Gender</td>  <td data-bind="text:gender"></td>   </td>
-				<tr><td>Age</td>     <td data-bind="text:age"></td>      </td>
-				<tr><td>Birthday</td><td data-bind="text:birthday"></td> </td>
-				<tr><td>Hair</td>    <td data-bind="text:hair"></td></td></td>
-				<tr><td>Eyes</td>    <td data-bind="text:eyes"></td>     </td>
-				<tr><td>Height</td>  <td data-bind="text:height"></td>   </td>
-				<tr><td>Build</td>  <td data-bind="text:weight"></td>   </td>
-			</table>-->
 			<div class="buttons">
 				<span data-bind="click:mark, css: { marked: marked }">Mark</span>
 				<span data-bind="click:reject, visible: !marked()">Reject</span>
 			</div>
-		<div>
+		</div>
 	</div>
+	
+	<div style="clear:both">
+		Data Sources:</br>
+		<a href="http://www.census.gov/genealogy/www/data/1990surnames/names_files.html">Name Lists from the US 1990 Census</a> - Used for male, female, and last names</br>
+		<a href="http://www.desiquintans.com/articles.php?page=nounlist">The Great Noun List</a> - Used for nouns</br>
+		<a href="http://www.geonames.org">GeoNames</a> - Used for location names
+	</div>
+
 	<script src="lib/knockout.js"></script>
 	<script src="main.js"></script>
 	<script>
