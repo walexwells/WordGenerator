@@ -19,9 +19,9 @@
 	<div id="wordPanel" data-bind="foreach: words">
 		<div class="namecard" data-bind="visible:visible">
 			<div class="name" data-bind="text:name">George Cannot</div>
-			<div class="buttons">
-				<span data-bind="click:mark, css: { marked: marked }">Mark</span>
+			<div class="buttons" data-bind="visible:$parent.showButtons">
 				<span data-bind="click:reject, visible: !marked()">Reject</span>
+				<span data-bind="click:mark, css: { marked: marked }">Mark</span>
 			</div>
 		</div>
 	</div>
@@ -37,6 +37,9 @@
 		<span class="label">Type:</span>
 		<span class="button" data-bind="css: {selected: generated()}, click: toggleGenerated" >Generated</span>
 		<span class="button" data-bind="css: {selected: !generated()}, click: toggleGenerated" >Real</span>
+	</div>
+	<div>
+		<span class="button" data-bind="css: {selected: showButtons}, click: function(){showButtons(!showButtons())}" >Show Buttons</span>
 	</div>
 	
 	<h3>Acknowledgements</h3>

@@ -260,5 +260,7 @@ function ViewModel(){
 		generated(!generated());
 		this.next()
 	}
+	
+	this.showButtons = ko.observable(false);
 
 }
