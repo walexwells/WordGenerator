@@ -1,34 +1,49 @@
 
-.family>p{
-	margin: 0 1em 0 0;
+
+		
+html{
+	background-color: rgb(201, 209, 216);
 }
-.family>div{
-	padding-left: 1em;
+
+body {
+	/*font-size: 200%;*/
 }
+
+#wordPanel {
+	text-align: center;
+}
+
+.button {
+	border: solid black 1px;
+	padding: .2em .4em;
+	margin: .2em 0;
+	border-radius: .4em;
+	display: inline-block;
+	background-color: white;
+	cursor: pointer;
+}
+.button:hover{
+	background-color: #eee;
+}
+.button:active{
+	background-color: #ddd;
+}
+.button.selected{
+	background-color: green;
+}
+
+
 p{
 	margin: 0;
 }
-.column{
-	float: left;
-	width: 25%;
-}
-dt, dd {
-	display: inline-block,
-}
+
 .namecard{
 	border: 1px solid black;
 	padding: 1em;
-	margin: 2px;
+	margin: .2em;
 	min-width: 20em;
-	float: left;
 	background-color: rgb(247, 255, 226);
-}
-td:nth-child(1){
-	font-weight: bold;
-	padding-right: 1em;
-}
-td:nth-child(1)::after{
-	content: ":";
+	display: inline-block;
 }
 .namecard .buttons{
 	text-align: right;
@@ -42,8 +57,8 @@ td:nth-child(1)::after{
 }
 .namecard .buttons span{
 	border: solid black 1px;
-	padding: 2px 4px;
-	border-radius: 4px;
+	padding: .2em .4em;
+	border-radius: .4em;
 	display: inline-block;
 	background-color: white;
 }
@@ -72,14 +87,3 @@ td:nth-child(1)::after{
 	background-color: rgb(255, 226, 226);
 }
 
-input[type=number] {
-	width: 3em;
-}
-
-label>*{
-	vertical-align: middle;
-}
-
-input[type=radio] {
-	margin-bottom: 5px;
-}

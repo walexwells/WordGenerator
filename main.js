@@ -151,11 +151,15 @@ NameCard.prototype.reject = function(){
 };
 
 function ViewModel(){
+
+
+	var wordType = ko.observable('person'),
+		gender = ko.observable('both'),
+		generated = ko.observable(true);
 	
 	this.words = ko.observableArray();
 	
 	this.next = function(){
-		
 		
 		var words = this.words() || [];
 		
@@ -166,12 +170,33 @@ function ViewModel(){
 			return arr;
 		},[]);
 		
-		var selectedTypes = dataStore.wordTypes.reduce(function(arr,type){
-			if(this[type]()){
-				arr.push(type);
-			}
-			return arr;
-		}.bind(this),[]);
+		var selectedTypes;
+		
+		switch(wordType()){
+			case 'person':
+				if(gender() == 'male'){
+					selectedTypes = ['maleFull']
+				}else if(gender() == 'female'){
+					selectedTypes = ['femaleFull']
+				} else {
+					selectedTypes = ['maleFull','femaleFull']
+				}
+				break;
+			case 'place':
+				selectedTypes = ['location']
+				break;
+			case 'thing':
+				selectedTypes = ['noun']
+				break;
+			default:
+				throw new Error('Invalid word type');
+		}
+		
+		if(!generated()){
+			selectedTypes = selectedTypes.map(function(type){
+				return 'real'+type[0].toUpperCase()+type.slice(1)
+			});
+		}
 		
 		if(selectedTypes.length){
 			while(words.length < 30){
@@ -194,5 +219,46 @@ function ViewModel(){
 	}.bind(this));
 	
 	
+	
+	this.typeIsPerson = ko.computed(function(){
+		return wordType() == 'person'
+	}.bind(this))
+	this.typeIsPlace = ko.computed(function(){
+		return wordType() == 'place'
+	}.bind(this))
+	this.typeIsThing = ko.computed(function(){
+		return wordType() == 'thing'
+	}.bind(this))
+	this.setTypeToPerson = function(){
+		wordType('person');
+		this.next()
+	}
+	this.setTypeToPlace = function(){
+		wordType('place');
+		this.next()
+	}
+	this.setTypeToThing = function(){
+		wordType('thing');
+		this.next()
+	}
+	
+	this.genderIsMale = ko.computed(function(){
+		return gender() == 'male'
+	});
+	this.genderIsFemale = ko.computed(function(){
+		return gender() == 'female'
+	});
+	this.genderIsBoth = ko.computed(function(){
+		return gender() == 'both'
+	});
+	this.setGenderToMale = function(){gender('male');this.next()}
+	this.setGenderToFemale = function(){gender('female');this.next()}
+	this.setGenderToBoth = function(){gender('both');this.next()}
+	
+	this.generated = generated;
+	this.toggleGenerated = function(){
+		generated(!generated());
+		this.next()
+	}
 
 }
