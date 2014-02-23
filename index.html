@@ -28,13 +28,11 @@
 	
 	<h3>Advanced Options</h3>
 	<div data-bind="visible:typeIsPerson">
-		<span class="label">Gender:</span>
 		<span class="button" data-bind="css: {selected: genderIsMale}, click: setGenderToMale">Male</span>
 		<span class="button" data-bind="css: {selected: genderIsFemale}, click: setGenderToFemale">Female</span>
 		<span class="button" data-bind="css: {selected: genderIsBoth}, click: setGenderToBoth">Both</span>
 	</div>
 	<div>
-		<span class="label">Type:</span>
 		<span class="button" data-bind="css: {selected: generated()}, click: toggleGenerated" >Generated</span>
 		<span class="button" data-bind="css: {selected: !generated()}, click: toggleGenerated" >Real</span>
 	</div>
