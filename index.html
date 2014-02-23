@@ -25,7 +25,14 @@
 			</div>
 		</div>
 	</div>
-	
+	<div style="text-align: right;">
+		<span class="button" data-bind="click: next">Generate More</span>
+	</div>
+	<div>
+		<span class="button" data-bind="css: {selected: typeIsPerson}, click: setTypeToPerson">Person</span>
+		<span class="button" data-bind="css: {selected: typeIsPlace}, click: setTypeToPlace">Place</span>
+		<span class="button" data-bind="css: {selected: typeIsThing}, click: setTypeToThing">Thing</span>
+	<div>
 	<h3>Advanced Options</h3>
 	<div data-bind="visible:typeIsPerson">
 		<span class="button" data-bind="css: {selected: genderIsMale}, click: setGenderToMale">Male</span>
