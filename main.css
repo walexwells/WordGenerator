@@ -47,9 +47,7 @@ p{
 	border: 1px solid black;
 	padding: 1em;
 	margin: .2em;
-	min-width: 20em;
 	background-color: rgb(247, 255, 226);
-	display: inline-block;
 }
 .namecard .buttons{
 	text-align: right;
@@ -91,5 +89,14 @@ p{
 }
 .namecard.female {
 	background-color: rgb(255, 226, 226);
+}
+
+@media (min-width: 700px) {
+
+	.namecard{
+		width: 20em;
+		display: inline-block;
+	}
+
 }
 
